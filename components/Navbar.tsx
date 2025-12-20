@@ -22,25 +22,19 @@ const Navbar: React.FC = () => {
             </a>
             
             <div className="hidden md:flex items-center space-x-8">
-              {['Services', 'Work', 'Intelligence', 'Contact'].map((item) => (
-                <a 
-                  key={item} 
-                  href={`#${item.toLowerCase()}`}
-                  className="text-[10px] mono uppercase tracking-widest text-zinc-500 hover:text-white transition-colors"
-                >
-                  {item}
-                </a>
-              ))}
+              <a href="#services" className="text-[10px] mono uppercase tracking-widest text-zinc-500 hover:text-white transition-colors">Services</a>
+              <a href="#about" className="text-[10px] mono uppercase tracking-widest text-zinc-500 hover:text-white transition-colors">About</a>
+              <a href="#contact" className="text-[10px] mono uppercase tracking-widest text-zinc-500 hover:text-white transition-colors">Contact</a>
             </div>
           </div>
 
           <div className="flex items-center space-x-6">
             <span className="hidden lg:block text-[10px] mono text-zinc-600 uppercase tracking-tighter">
-              Availability: Q3 2024
+              Availability: ACTIVE
             </span>
-            <button className="text-[11px] mono uppercase font-bold tracking-widest text-black bg-white px-6 py-2 rounded-full hover:bg-zinc-200 transition-all">
-              Initiate
-            </button>
+            <a href="#contact" className="text-[11px] mono uppercase font-bold tracking-widest text-black bg-white px-6 py-2 rounded-full hover:bg-zinc-200 transition-all">
+              Book Call
+            </a>
           </div>
         </div>
       </div>

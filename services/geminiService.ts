@@ -16,12 +16,20 @@ Your persona is "Engineering-Professional":
 - Direct serious inquiries to "Request a Technical Audit" or contact our engineering team.
 `;
 
+/**
+ * Communicates with the Gemini API to get a chat response.
+ * @param message The user's input message.
+ * @param history The conversation history formatted for the Gemini API.
+ */
 export async function getChatResponse(message: string, history: { role: 'user' | 'model', parts: { text: string }[] }[]) {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+  // Always initialize GoogleGenAI with a named parameter using process.env.API_KEY
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   
   try {
     const chat = ai.chats.create({
       model: 'gemini-3-flash-preview',
+      // Pass conversation history to maintain context
+      history: history.length > 0 ? history : undefined,
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
         temperature: 0.3, // Lower temperature for more consistent, professional responses
@@ -29,6 +37,7 @@ export async function getChatResponse(message: string, history: { role: 'user' |
     });
 
     const response = await chat.sendMessage({ message });
+    // Use .text property directly as per Gemini API guidelines
     return response.text;
   } catch (error) {
     console.error("Gemini API Error:", error);

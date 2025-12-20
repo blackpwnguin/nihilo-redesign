@@ -25,10 +25,21 @@ const ChatAssistant: React.FC = () => {
     if (!inputValue.trim() || isLoading) return;
     const userMessage = inputValue.trim();
     setInputValue('');
-    setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+    
+    // Track conversation history locally for the UI
+    const updatedMessages = [...messages, { role: 'user' as const, content: userMessage }];
+    setMessages(updatedMessages);
     setIsLoading(true);
+
     try {
-      const response = await getChatResponse(userMessage, []);
+      // Format history for Gemini API: mapping 'assistant' to 'model' and extracting parts
+      // Skip the first initialization message and exclude the latest user message which is sent as the primary argument
+      const apiHistory = updatedMessages.slice(1, -1).map(msg => ({
+        role: msg.role === 'user' ? 'user' as const : 'model' as const,
+        parts: [{ text: msg.content }]
+      }));
+
+      const response = await getChatResponse(userMessage, apiHistory);
       setMessages(prev => [...prev, { role: 'assistant', content: response || "ERR_NULL_RESPONSE" }]);
     } catch (error) {
       setMessages(prev => [...prev, { role: 'assistant', content: "ERR_CONNECTION_FAILED" }]);
