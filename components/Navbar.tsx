@@ -32,7 +32,10 @@ const Navbar: React.FC = () => {
             <span className="hidden lg:block text-[10px] mono text-zinc-600 uppercase tracking-tighter">
               Availability: ACTIVE
             </span>
-            <a href="#contact" className="text-[11px] mono uppercase font-bold tracking-widest text-black bg-white px-6 py-2 rounded-full hover:bg-zinc-200 transition-all">
+            <a 
+              href="#contact" 
+              className="text-[11px] mono uppercase font-bold tracking-widest text-black bg-white px-6 py-2 rounded-full hover:bg-zinc-200 transition-all"
+            >
               Book Call
             </a>
           </div>

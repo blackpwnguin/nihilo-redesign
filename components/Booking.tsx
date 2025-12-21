@@ -48,7 +48,7 @@ const Booking: React.FC = () => {
               <p className="text-zinc-500 text-sm mb-10 mono">ESTABLISHING_ENCRYPTED_LINK...</p>
               
               <a 
-                href="https://teams.microsoft.com/l/meetup-join/..." // Replace with your actual MS Bookings / Teams link
+                href="https://outlook.office365.com/owa/calendar/NihiloSolutions@nihilosolutions.com/bookings/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center space-x-4 w-full py-6 bg-white text-black font-black uppercase text-xs tracking-[0.3em] hover:bg-zinc-200 transition-all shadow-[0_0_30px_rgba(255,255,255,0.1)]"

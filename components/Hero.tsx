@@ -27,14 +27,20 @@ const Hero: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6">
-            <button className="group flex items-center justify-center space-x-3 px-10 py-5 bg-white text-black font-bold uppercase text-xs tracking-[0.2em] hover:bg-zinc-200 transition-all">
+            <a 
+              href="#services" 
+              className="group flex items-center justify-center space-x-3 px-10 py-5 bg-white text-black font-bold uppercase text-xs tracking-[0.2em] hover:bg-zinc-200 transition-all"
+            >
               <span>View Solutions</span>
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="flex items-center justify-center space-x-3 px-10 py-5 border border-zinc-800 bg-zinc-900/40 text-white font-bold uppercase text-xs tracking-[0.2em] hover:bg-zinc-800 transition-all">
-              <span>Cloud Capabilities</span>
+            </a>
+            <a 
+              href="#about" 
+              className="flex items-center justify-center space-x-3 px-10 py-5 border border-zinc-800 bg-zinc-900/40 text-white font-bold uppercase text-xs tracking-[0.2em] hover:bg-zinc-800 transition-all"
+            >
+              <span>Our Expertise</span>
               <ChevronRight size={16} />
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -53,7 +59,7 @@ const Hero: React.FC = () => {
             </span>
           </div>
           <div className="tracking-widest">
-            STABLE_ENGINE_V4.0 // LATENCY: 22MS
+            STABLE_ENGINE_V4.0 // STATUS: OPERATIONAL
           </div>
         </div>
       </div>

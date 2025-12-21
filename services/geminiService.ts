@@ -13,7 +13,7 @@ Your persona is "Engineering-Professional":
 - Avoid hyperbole (no "revolutionary", "game-changing", etc).
 - Use terminology like "latency", "throughput", "scalability", "architectural integrity".
 - If asked about projects, mention that we design tailored solutions for AWS and Azure environments.
-- Direct serious inquiries to "Request a Technical Audit" or contact our engineering team.
+- Direct serious inquiries to "Request a Technical Audit" in the contact section or via our Microsoft Teams booking link.
 `;
 
 /**
@@ -22,25 +22,31 @@ Your persona is "Engineering-Professional":
  * @param history The conversation history formatted for the Gemini API.
  */
 export async function getChatResponse(message: string, history: { role: 'user' | 'model', parts: { text: string }[] }[]) {
-  // Always initialize GoogleGenAI with a named parameter using process.env.API_KEY
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  // Safe extraction of the API key
+  const apiKey = typeof process !== 'undefined' ? process.env.API_KEY : '';
+  
+  if (!apiKey) {
+    console.error("Gemini API Key missing.");
+    return "SYSTEM_ERROR: API authentication failed. Contact support at eng@nihilosolutions.com.";
+  }
+
+  const ai = new GoogleGenAI({ apiKey });
   
   try {
     const chat = ai.chats.create({
       model: 'gemini-3-flash-preview',
-      // Pass conversation history to maintain context
       history: history.length > 0 ? history : undefined,
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
-        temperature: 0.3, // Lower temperature for more consistent, professional responses
+        temperature: 0.3,
       },
     });
 
     const response = await chat.sendMessage({ message });
-    // Use .text property directly as per Gemini API guidelines
+    // Directly access .text property
     return response.text;
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return "ERR_PROTOCOL_INTERRUPTED: Connection to intelligence layer timed out. Please contact eng@nihilosolutions.com.";
+    return "PROTOCOL_ERR: Connection to the intelligence core was interrupted. Please attempt re-initialization.";
   }
 }
